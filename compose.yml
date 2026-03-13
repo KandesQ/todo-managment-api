@@ -1,0 +1,24 @@
+services:
+  mysql:
+    image: mysql:${MYSQL_VERSION}
+    restart: unless-stopped
+    networks:
+      - default
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u ${DB_USERNAME} -p${DB_PASSWORD}"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    env_file:
+      - ./.env
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE?Variable not set}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD?Variable not set}
+    ports: # Remove from prod
+      - "${DB_PORT}:${DB_PORT}"
+    volumes:
+      - todo-managment-api:/var/lib/mysql
+
+volumes:
+  todo-managment-api:
