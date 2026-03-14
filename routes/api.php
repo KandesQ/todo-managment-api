@@ -12,5 +12,6 @@ Route::get('/user', function (Request $request) {
 Route::prefix("tasks")->group(function () {
     Route::controller(TaskController::class)->group(function () {
         Route::post("", "store");
+        Route::get("", "index");
     });
 });

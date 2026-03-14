@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateTaskRequest;
-use App\Models\Enums\TaskStatus;
+use App\Http\Resources\TaskResource;
 use App\Models\Task;
 
 class TaskController extends Controller
@@ -12,5 +12,9 @@ class TaskController extends Controller
         $createdTask = Task::create($req->validated());
         
         return response()->json($createdTask, 201);
+    }
+
+    public function index() {
+        return TaskResource::collection(Task::all());
     }
 }
