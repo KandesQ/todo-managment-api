@@ -32,4 +32,11 @@ class TaskController extends Controller
 
         return new TaskResource($taskToUpdate->refresh());
     }
+
+    public function destroy($id) {
+        $taskToDelete = Task::findOrFail($id);
+        $taskToDelete->delete();
+
+        return response()->noContent(200);
+    }
 }
