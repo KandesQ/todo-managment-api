@@ -12,8 +12,7 @@ class TaskController extends Controller
     public function store(CreateTaskRequest $req) {
         $createdTask = Task::create($req->validated());
         
-        # TODO: change to TaskResource
-        return response()->json($createdTask, 201);
+        return new TaskResource($createdTask);
     }
 
     public function index() {
