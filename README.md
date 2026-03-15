@@ -16,14 +16,16 @@
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://php.new/install/windows/8.4'))
 ```
 
-Установите зависимости:
-```bash
-composer install
-```
-
 ## Запуск приложения:
-1. Продублируйте файл *.env.example* в корень проекта (Ctrl + C, Ctrl + V)
-2. Переименуйте дубль в *.env*
+1. установите зависимости:
+    ```bash
+    composer install
+    ```
+
+2. Продублируйте файл *.env.example* в корень проекта (Ctrl + C, Ctrl + V)
+3. Переименуйте дубль в *.env*
+
+<br>
 
 Для старта приложения должен быть запущен [Docker](https://www.docker.com/)
 ```bash
