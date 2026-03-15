@@ -39,6 +39,12 @@ docker compose up -d
 ```bash
 docker compose up mysql -d
 ```
+
+После поднятия базы, вручную запустите миграции:
+```bash
+php artisan migrate
+```
+
 и приложение через IDE:
 ```bash
 php artisan serve
