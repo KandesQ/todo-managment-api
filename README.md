@@ -22,7 +22,10 @@ composer install
 ```
 
 ## Запуск приложения:
-Должен быть запущен [Docker](https://www.docker.com/)
+1. Продублируйте файл *.env.example* в корень проекта (Ctrl + C, Ctrl + V)
+2. Переименуйте дубль в *.env*
+
+Для старта приложения должен быть запущен [Docker](https://www.docker.com/)
 ```bash
 docker compose up -d
 ```
