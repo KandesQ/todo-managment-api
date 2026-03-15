@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use App\Models\Enums\TaskStatus;
 use Illuminate\Contracts\Validation\ValidationRule;
+use \Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -31,5 +33,12 @@ class UpdateTaskRequest extends FormRequest
             "description" => "sometimes|string|max:1000",
             "status" => ["sometimes", "integer", Rule::in(array_column(TaskStatus::cases(), "value"))]
         ];
+    }
+
+    public function failedValidation(Validator $validator)
+    {        
+        throw new HttpResponseException(response()->json([
+            "errors" => $validator->errors()
+        ], 422));
     }
 }
