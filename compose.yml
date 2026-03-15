@@ -10,15 +10,29 @@ services:
       timeout: 10s
       retries: 3
       start_period: 10s
-    env_file:
-      - ./.env
     environment:
       MYSQL_DATABASE: ${DB_DATABASE?Variable not set}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD?Variable not set}
     ports: # Remove from prod
       - "${DB_PORT}:${DB_PORT}"
     volumes:
-      - todo-managment-api:/var/lib/mysql
-
-volumes:
+      - todo-managment-api-db-data:/var/lib/mysql
+  
   todo-managment-api:
+    build:
+      context: .
+    networks:
+      - default
+    depends_on:
+      mysql:
+        condition: service_healthy
+        restart: true
+    env_file:
+      - ./.env
+    environment:
+      - DB_HOST=mysql
+    ports:
+      - "8000:8000" # remove forwarding in prod
+      
+volumes:
+  todo-managment-api-db-data:
